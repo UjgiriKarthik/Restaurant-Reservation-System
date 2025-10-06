@@ -1,4 +1,3 @@
-//frontend/src/Pages/Manager.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../App.css';
@@ -7,9 +6,12 @@ const Manager = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // ✅ Use Vite environment variable
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
   const fetchReservations = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/api/v1/reservation")
+      const { data } = await axios.get(`${API_BASE_URL}/api/v1/reservation`);
       setReservations(data.reservations);
     } catch (error) {
       console.error("Error fetching reservations:", error);
